@@ -1,0 +1,171 @@
+# MustangMeals 🐴
+
+Rate and review food spots on the Cal Poly SLO campus.
+
+---
+
+## Local Development
+
+### 1. Install Node.js
+Download from https://nodejs.org (LTS version)
+
+### 2. Install Expo CLI + EAS CLI
+```bash
+npm install -g expo-cli eas-cli
+```
+
+### 3. Install dependencies
+```bash
+cd MustangMeals
+npm install
+```
+
+### 4. Start the app
+```bash
+npx expo start
+```
+
+Scan the QR code with **Expo Go** on your phone to preview instantly.
+
+---
+
+## Publishing to App Store + Google Play
+
+### Step 1 — Create your accounts (do this first)
+
+| Store | URL | Cost |
+|---|---|---|
+| Apple App Store | https://developer.apple.com/programs | $99/year |
+| Google Play Store | https://play.google.com/console | $25 one-time |
+
+---
+
+### Step 2 — Set up EAS
+
+```bash
+# Log in to your Expo account (create one free at expo.dev)
+eas login
+
+# Link this project to EAS (run inside the MustangMeals folder)
+eas init
+
+# This gives you a projectId — paste it into app.json under extra.eas.projectId
+```
+
+---
+
+### Step 3 — Fill in your credentials in eas.json
+
+Open `eas.json` and replace the placeholder values:
+
+| Placeholder | Where to find it |
+|---|---|
+| `YOUR_APPLE_ID@email.com` | Your Apple Developer login email |
+| `YOUR_APP_STORE_CONNECT_APP_ID` | App Store Connect → My Apps → your app → App Information |
+| `YOUR_APPLE_TEAM_ID` | https://developer.apple.com → Membership → Team ID |
+| `google-service-account.json` | Google Play Console → Setup → API access → Service accounts |
+
+---
+
+### Step 4 — Create your app icon + splash screen
+
+Place these files in the `assets/` folder:
+
+| File | Size | Notes |
+|---|---|---|
+| `icon.png` | 1024×1024 | No transparency, no rounded corners (stores handle that) |
+| `splash.png` | 1284×2778 | Your logo centered, white background |
+| `adaptive-icon.png` | 1024×1024 | Android only — can have transparency |
+| `favicon.png` | 48×48 | Web only |
+
+Free tool to generate all sizes: https://www.appicon.co
+
+---
+
+### Step 5 — Build for both stores
+
+```bash
+# Build for both iOS and Android at once (runs in Expo's cloud)
+npm run build:all
+
+# Or individually:
+npm run build:ios
+npm run build:android
+```
+
+This uploads your code to Expo's servers and builds the `.ipa` and `.aab` files.
+You'll get a download link when done (takes ~10–20 min).
+
+---
+
+### Step 6 — Submit to the stores
+
+```bash
+# Submit to both stores automatically
+npm run submit:ios
+npm run submit:android
+```
+
+Or download the build files and upload manually via App Store Connect / Google Play Console.
+
+---
+
+### Step 7 — Store listings
+
+Before your app goes live, each store needs:
+
+**Both stores:**
+- App name: MustangMeals
+- Short description: Rate and review food spots at Cal Poly SLO
+- Screenshots: at least 3 (use the Expo Go simulator)
+- Privacy policy URL: required — generate one free at https://privacypolicygenerator.info
+
+**Apple only:**
+- Age rating (choose 4+)
+- Category: Food & Drink
+
+**Android only:**
+- Content rating questionnaire (5 min in Play Console)
+
+---
+
+## Review Timeline
+
+| Store | Typical Wait |
+|---|---|
+| Google Play | 1–3 days |
+| Apple App Store | 1–7 days |
+
+---
+
+## Project Structure
+
+```
+MustangMeals/
+├── App.js                          # Navigation setup
+├── app.json                        # Expo + store config
+├── eas.json                        # EAS build + submit config
+├── package.json                    # Dependencies + build scripts
+├── assets/                         # Icon + splash screen (add these!)
+│   ├── icon.png
+│   ├── splash.png
+│   └── adaptive-icon.png
+└── src/
+    ├── data/
+    │   └── spots.js                # Campus food spots + reviews
+    ├── screens/
+    │   ├── HomeScreen.js           # Browse & search
+    │   ├── DetailScreen.js         # Spot info + reviews
+    │   └── WriteReviewScreen.js    # Submit a review
+    └── theme.js                    # Colors & typography
+```
+
+---
+
+## Next Steps (after launch)
+
+- Connect **Supabase** so reviews persist across all users
+- Add **Cal Poly email login**
+- Add **food photo uploads**
+- Add a **social feed** of recent reviews
+- Add **push notifications**
