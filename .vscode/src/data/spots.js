@@ -8,6 +8,14 @@ export const spots = [
     rating: 3.8,
     open: true,
     hours: '7am – 10pm',
+    stations: [
+      { id: 'vg-1', name: 'Brunch', emoji: '🍳' },
+      { id: 'vg-2', name: 'Nosh', emoji: '🥪' },
+      { id: 'vg-3', name: 'Streats', emoji: '🌮' },
+      { id: 'vg-4', name: 'Hearth', emoji: '🍕' },
+      { id: 'vg-5', name: 'Panda Express', emoji: '🥡' },
+      { id: 'vg-6', name: 'Jamba Juice', emoji: '🥤' },
+    ],
     reviews: [
       { id: 1, user: 'Alex M.', stars: 4, text: 'Nosh is solid for breakfast. Try the omelets before 9am.', date: '2 days ago' },
       { id: 2, user: 'Jordan K.', stars: 3, text: 'Streats tacos are hit or miss but Brunch is reliable.', date: '1 week ago' },
@@ -16,13 +24,20 @@ export const spots = [
   },
   {
     id: 2,
-    name: '19 Metro Station',
+    name: '1901 Marketplace',
     tag: 'Dining Hall · Building 19',
-    emoji: '🥗',
+    emoji: '🏪',
     category: 'Dining Hall',
     rating: 4.1,
     open: true,
     hours: '7am – 9pm',
+    stations: [
+      { id: '19-1', name: 'The Grill', emoji: '🍔' },
+      { id: '19-2', name: 'Global Kitchen', emoji: '🌍' },
+      { id: '19-3', name: 'Greens & Grains', emoji: '🥗' },
+      { id: '19-4', name: 'Dessert Bar', emoji: '🍰' },
+      { id: '19-5', name: 'Starbucks', emoji: '☕' },
+    ],
     reviews: [
       { id: 1, user: 'Sam R.', stars: 4, text: 'Way less crowded than Vista Grande. Salad bar is huge.', date: '3 days ago' },
       { id: 2, user: 'Taylor P.', stars: 5, text: 'Best dining hall on campus, hands down.', date: '1 week ago' },

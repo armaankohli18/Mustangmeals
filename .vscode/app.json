@@ -14,11 +14,7 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.mustangmeals.app",
-      "buildNumber": "1",
-      "infoPlist": {
-        "NSCameraUsageDescription": "Used to take photos of food for reviews.",
-        "NSPhotoLibraryUsageDescription": "Used to upload food photos for reviews."
-      }
+      "buildNumber": "1"
     },
     "android": {
       "adaptiveIcon": {
@@ -26,23 +22,12 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.mustangmeals.app",
-      "versionCode": 1,
-      "permissions": [
-        "CAMERA",
-        "READ_EXTERNAL_STORAGE",
-        "WRITE_EXTERNAL_STORAGE"
-      ]
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
+      "versionCode": 1
     },
     "extra": {
       "eas": {
         "projectId": "YOUR_EAS_PROJECT_ID"
       }
-    },
-    "plugins": [
-      "expo-router"
-    ]
+    }
   }
 }
