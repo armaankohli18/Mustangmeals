@@ -1,0 +1,17 @@
+{
+  "expo": {
+    "name": "MustangMeals",
+    "slug": "mustang-meals",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.mustangmeals.app"
+    },
+    "android": {
+      "package": "com.mustangmeals.app",
+      "versionCode": 1
+    }
+  }
+}
