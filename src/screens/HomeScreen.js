@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import {
-  View, Text, TextInput, ScrollView,
+  View, Text, Image, TextInput, ScrollView,
   TouchableOpacity, StyleSheet, SafeAreaView, StatusBar,
 } from 'react-native';
 import { spots, CATEGORIES } from '../data/spots';
@@ -17,7 +17,7 @@ function FeaturedCard({ spot, onPress }) {
   return (
     <TouchableOpacity style={styles.featuredCard} onPress={onPress} activeOpacity={0.8}>
       <View style={[styles.featuredCardImg, { backgroundColor: cardColors[idx] }]}>
-        <Text style={styles.featuredEmoji}>{spot.emoji}</Text>
+        <Image source={{ uri: spot.image }} style={styles.featuredCardImg} />
       </View>
       <View style={styles.featuredCardBody}>
         <Text style={styles.featuredCardName} numberOfLines={1}>{spot.name}</Text>
@@ -36,7 +36,7 @@ function SpotListItem({ spot, onPress }) {
   return (
     <TouchableOpacity style={styles.listItem} onPress={onPress} activeOpacity={0.7}>
       <View style={styles.listEmoji}>
-        <Text style={styles.listEmojiText}>{spot.emoji}</Text>
+        <Image source={{ uri: spot.image }} style={styles.listImage} />
       </View>
       <View style={styles.listInfo}>
         <Text style={styles.listName}>{spot.name}</Text>
@@ -141,7 +141,16 @@ const styles = StyleSheet.create({
   sectionLabel: { paddingHorizontal: 20, paddingTop: 16, paddingBottom: 10, fontSize: 11, fontWeight: '600', color: colors.textTertiary, letterSpacing: 0.8 },
   featuredScroll: { paddingHorizontal: 20 },
   featuredCard: { width: 180, backgroundColor: colors.surface, borderRadius: 14, borderWidth: 0.5, borderColor: colors.border, overflow: 'hidden', marginRight: 12 },
-  featuredCardImg: { height: 90, alignItems: 'center', justifyContent: 'center' },
+  featuredCardImg: {
+  height: 90,
+  width: '100%',
+  resizeMode: 'cover',
+},
+listImage: {
+  width: 44, height: 44,
+  borderRadius: 12,
+  resizeMode: 'cover',
+},
   featuredEmoji: { fontSize: 36 },
   featuredCardBody: { padding: 12 },
   featuredCardName: { fontSize: 14, fontWeight: '600', color: colors.textPrimary, marginBottom: 2 },
@@ -164,4 +173,5 @@ const styles = StyleSheet.create({
   badgeClosed: { backgroundColor: colors.closedRedBg },
   badgeText: { fontSize: 11, fontWeight: '500' },
   emptyText: { textAlign: 'center', color: colors.textTertiary, paddingVertical: 40, fontSize: 15 },
+
 });

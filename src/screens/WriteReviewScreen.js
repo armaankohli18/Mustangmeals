@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  View, Text, TextInput, TouchableOpacity, StyleSheet,
+  View, Text, Image, TextInput, TouchableOpacity, StyleSheet,
   SafeAreaView, ScrollView, KeyboardAvoidingView, Platform, Alert,
 } from 'react-native';
 import { spots } from '../data/spots';
@@ -103,12 +103,15 @@ function StepWriteReview({ hall, station, onSubmit }) {
 }
 
 export default function WriteReviewScreen({ route, navigation }) {
-  const { spotId } = route.params;
-  const [step, setStep] = useState(spotId ? 2 : 1);
+  const { spotId, stationId } = route.params;
+  const spot = spots.find(s => s.id === spotId);
+  const preselectedStation = stationId ? spot?.stations?.find(s => s.id === stationId) : null;
+
+  const [step, setStep] = useState(preselectedStation ? 3 : spot?.category === 'Dining Hall' ? 2 : 1);
   const [selectedHall, setSelectedHall] = useState(
-    spotId ? spots.find(s => s.id === spotId) : null
+    preselectedStation || spot?.category === 'Dining Hall' ? spot : null
   );
-  const [selectedStation, setSelectedStation] = useState(null);
+  const [selectedStation, setSelectedStation] = useState(preselectedStation || null);
 
   function handleSelectHall(hall) {
     setSelectedHall(hall);
@@ -122,15 +125,16 @@ export default function WriteReviewScreen({ route, navigation }) {
 
   function handleBack() {
     if (step === 1) { navigation.goBack(); return; }
+    if (preselectedStation) { navigation.goBack(); return; }
     setStep(step - 1);
     if (step === 3) setSelectedStation(null);
   }
 
   function handleSubmit({ stars, text }) {
-    const spot = spots.find(s => s.id === selectedHall.id);
-    spot.reviews.unshift({ id: Date.now(), user: 'You', station: selectedStation.name, stars, text, date: 'Just now' });
-    const total = spot.reviews.reduce((sum, r) => sum + r.stars, 0);
-    spot.rating = Math.round((total / spot.reviews.length) * 10) / 10;
+    const spotToUpdate = spots.find(s => s.id === selectedHall.id);
+    spotToUpdate.reviews.unshift({ id: Date.now(), user: 'You', station: selectedStation.name, stars, text, date: 'Just now' });
+    const total = spotToUpdate.reviews.reduce((sum, r) => sum + r.stars, 0);
+    spotToUpdate.rating = Math.round((total / spotToUpdate.reviews.length) * 10) / 10;
     Alert.alert('Review posted!', `Thanks for reviewing ${selectedStation.name} at ${selectedHall.name} 🐴`, [
       { text: 'Done', onPress: () => navigation.navigate('Detail', { spotId: selectedHall.id }) },
     ]);
